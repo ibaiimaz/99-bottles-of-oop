@@ -13,33 +13,58 @@ public class Bottles {
     }
 
     public String verse(int number) {
-        switch (number) {
-            case 0:
-                return "No more bottles of beer on the wall, " +
-                        "no more bottles of beer.\n" +
-                        "Go to the store and buy some more, " +
-                        "99 bottles of beer on the wall.\n";
-            case 1:
-                return "1 bottle of beer on the wall, " +
-                        "1 bottle of beer.\n" +
-                        "Take it down and pass it around, " +
-                        "no more bottles of beer on the wall.\n";
-            case 2:
-                return "2 bottles of beer on the wall, " +
-                        "2 bottles of beer.\n" +
-                        "Take one down and pass it around, " +
-                        "1 bottle of beer on the wall.\n";
-            default:
-                return number + " bottles of beer on the wall, " +
-                        number + " bottles of beer.\n" +
-                        "Take one down and pass it around, " +
-                        (number - 1) + " bottles of beer on the wall.\n";
+        return capitalize(quantity(number)) + " " + container(number) + " of beer on the wall, " +
+                quantity(number) + " " + container(number) + " of beer.\n" +
+                action(number) + ", " +
+                quantity(succesor(number)) + " " + container(succesor(number)) + " of beer on the wall.\n";
+    }
 
+    private String container(int number) {
+        if (number == 1) {
+            return "bottle";
+        } else {
+            return "bottles";
+        }
+    }
+
+    private String quantity(int number) {
+        if (number == 0) {
+            return "no more";
+        } else {
+            return String.valueOf(number);
+        }
+    }
+
+    private String pronoun(int number) {
+        if (number == 1) {
+            return "it";
+        } else {
+            return "one";
+        }
+    }
+
+    private String action(int number) {
+        if (number == 0) {
+            return "Go to the store and buy some more";
+        } else {
+            return "Take " + pronoun(number) + " down and pass it around";
+        }
+    }
+
+    private int succesor(int number) {
+        if (number == 0) {
+            return 99;
+        } else {
+            return number - 1;
         }
     }
 
     private IntStream reverseIntRange(int to, int from)
     {
         return IntStream.rangeClosed(from + 1, to + 1).map(i -> to - i + from +  1 );
+    }
+
+    private String capitalize(String text) {
+        return text.substring(0, 1).toUpperCase() + text.substring(1);
     }
 }

@@ -48,7 +48,7 @@ public class BottlesTest {
                 "Take it down and pass it around, " +
                 "no more bottles of beer on the wall.\n";
 
-        assertThat(new Bottles().verse(1)).isEqualTo(expected);
+    assertThat(new Bottles().verse(1)).isEqualTo(expected);
     }
 
     @Test
